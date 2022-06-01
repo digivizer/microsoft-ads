@@ -14,7 +14,7 @@ module BingAdsReporting
     #
     def get_user
       response = client.call(:get_user, message: {})
-      response.body[:get_user_response]
+      get_user_result(response.body)
     rescue Savon::SOAPFault => e
       handle_error(e)
       logger.error e.message
@@ -37,6 +37,10 @@ module BingAdsReporting
     end
 
     private
+
+    def get_user_result(body)
+      body.dig(:get_user_response, :user) ? body[:get_user_response] : nil
+    end
 
     def wdsl
       WDSL
