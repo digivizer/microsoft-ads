@@ -6,6 +6,12 @@ module BingAdsReporting
     FAILED_STATUS = 'Error'.freeze
     SUCCESS_STATUS = 'Success'.freeze
 
+    #
+    # Get details about the currently authenticated user.
+    # Docs: https://docs.microsoft.com/en-us/advertising/customer-management-service/getuser?view=bingads-13
+    #
+    # @return [Hash] User info and customer roles
+    #
     def get_user
       response = client.call(:get_user, message: {})
       response.body[:get_user_response]
@@ -15,27 +21,15 @@ module BingAdsReporting
       raise e
     end
 
-    def get_customers_info
-      response = client.call(:get_customers_info, message: generate_get_customers_info_message)
-      response.body[:get_customers_info_response][:customers_info][:customer_info]
-    rescue Savon::SOAPFault => e
-      handle_error(e)
-      logger.error e.message
-      raise e
-    end
-
-    def get_accounts_info(customer_id:)
-      response = client.call(:get_accounts_info, message: generate_get_accounts_info_message(customer_id))
-      response.body[:get_accounts_info_response][:accounts_info][:account_info]
-    rescue Savon::SOAPFault => e
-      handle_error(e)
-      logger.error e.message
-      raise e
-    end
-
-    def find_accounts_or_customers_info
-      response = client.call(:find_accounts_or_customers_info, message: generate_find_accounts_or_customers_info_message)
-      response.body[:find_accounts_or_customers_info_response][:account_info_with_customer_data][:account_info_with_customer_data]
+    #
+    # Gets the identifiers, names, and numbers of accounts that are accessible from the specified customer.
+    # Docs: https://docs.microsoft.com/en-us/advertising/customer-management-service/getaccountsinfo?view=bingads-13
+    #
+    # @return [Array<Hash>] An array of information about advertiser accounts
+    #
+    def get_accounts_info
+      response = client.call(:get_accounts_info, message: {})
+      response.body[:get_accounts_info_response][:accounts_info]
     rescue Savon::SOAPFault => e
       handle_error(e)
       logger.error e.message
@@ -54,25 +48,6 @@ module BingAdsReporting
 
     def success_status
       SUCCESS_STATUS
-    end
-
-    def generate_get_customers_info_message
-      {
-        ns('CustomerNameFilter') => '',
-        ns('TopN') => 100
-      }
-    end
-
-    def generate_get_accounts_info_message(customer_id)
-      {
-        ns('CustomerId') => customer_id
-      }
-    end
-
-    def generate_find_accounts_or_customers_info_message
-      {
-        ns('TopN') => 5000
-      }
     end
   end
 end
