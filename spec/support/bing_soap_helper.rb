@@ -224,4 +224,50 @@ module BingSoapHelper
       </s:Body>
     </s:Envelope>'
   end
+
+  def self.get_accounts_info_success
+    '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+      <s:Header>
+        <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v13">17a2e9a9-0160-475e-a162-cf7c4db4ff0c</h:TrackingId>
+      </s:Header>
+      <s:Body>
+        <GetAccountsInfoResponse xmlns="https://bingads.microsoft.com/Customer/v13">
+            <AccountsInfo xmlns:a="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+              <a:AccountInfo>
+                  <a:Id>123456</a:Id>
+                  <a:Name>AdAccountA</a:Name>
+                  <a:Number>F4165213</a:Number>
+                  <a:AccountLifeCycleStatus>Active</a:AccountLifeCycleStatus>
+                  <a:PauseReason i:nil="true"/>
+              </a:AccountInfo>
+              <a:AccountInfo>
+                  <a:Id>552153</a:Id>
+                  <a:Name>AdAccountB</a:Name>
+                  <a:Number>F17521326</a:Number>
+                  <a:AccountLifeCycleStatus>Active</a:AccountLifeCycleStatus>
+                  <a:PauseReason i:nil="true"/>
+              </a:AccountInfo>
+            </AccountsInfo>
+        </GetAccountsInfoResponse>
+      </s:Body>
+    </s:Envelope>'
+  end
+
+  def self.get_accounts_info_error
+    '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+      <s:Header>
+        <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">
+          9e62cca1-78e7-429a-bb0a-58bac22d2c90
+        </h:TrackingId>
+      </s:Header>
+      <s:Body>
+        <GetUserResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+          <RequestStatus>Failed</RequestStatus>
+          <Errors>
+            <Error>Some Error</Error>
+          </Errors>
+        </GetUserResponse>
+      </s:Body>
+    </s:Envelope>'
+  end
 end

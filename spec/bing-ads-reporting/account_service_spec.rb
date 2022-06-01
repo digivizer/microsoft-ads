@@ -48,4 +48,24 @@ describe BingAdsReporting::AccountService do
       end
     end
   end
+
+  describe '#get_accounts_info' do
+    let(:get_accounts_info_response) { service.get_accounts_info }
+
+    context 'when request succeeds' do
+      let(:xml_response) { BingSoapHelper.get_accounts_info_success }
+      
+      it 'returns user info' do
+        expect(get_accounts_info_response).to be_a(Array)
+      end
+    end
+
+    context 'when request fails' do
+      let(:xml_response) { BingSoapHelper.get_accounts_info_error }
+      
+      it 'returns nil' do
+        expect(get_accounts_info_response).to eql(nil)
+      end
+    end
+  end
 end

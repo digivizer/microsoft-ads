@@ -29,7 +29,7 @@ module BingAdsReporting
     #
     def get_accounts_info
       response = client.call(:get_accounts_info, message: {})
-      response.body[:get_accounts_info_response][:accounts_info]
+      get_accounts_info_result(response.body)
     rescue Savon::SOAPFault => e
       handle_error(e)
       logger.error e.message
@@ -40,6 +40,10 @@ module BingAdsReporting
 
     def get_user_result(body)
       body.dig(:get_user_response, :user) ? body[:get_user_response] : nil
+    end
+
+    def get_accounts_info_result(body)
+      body.dig(:get_accounts_info_response, :accounts_info, :account_info) ? body[:get_accounts_info_response][:accounts_info][:account_info] : nil
     end
 
     def wdsl
