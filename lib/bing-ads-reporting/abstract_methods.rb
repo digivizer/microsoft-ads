@@ -2,7 +2,7 @@ module BingAdsReporting
   module AbstractMethods
     private
 
-    def wdsl
+    def wsdl
       raise NotImplementedError, "subclass did not define ##{__method__}"
     end
 
