@@ -2,7 +2,7 @@ require_relative 'service_core'
 
 module BingAdsReporting
   class AccountService < ServiceCore
-    WDSL = 'https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v13/CustomerManagementService.svc?singleWsdl'.freeze
+    WSDL = 'https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v13/CustomerManagementService.svc?singleWsdl'.freeze
     FAILED_STATUS = 'Error'.freeze
     SUCCESS_STATUS = 'Success'.freeze
 
@@ -46,8 +46,8 @@ module BingAdsReporting
       body.dig(:get_accounts_info_response, :accounts_info, :account_info) ? body[:get_accounts_info_response][:accounts_info][:account_info] : nil
     end
 
-    def wdsl
-      WDSL
+    def wsdl
+      WSDL
     end
 
     def failed_status

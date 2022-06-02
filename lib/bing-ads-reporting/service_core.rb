@@ -110,7 +110,7 @@ module BingAdsReporting
       header = BingAdsReporting::BingSettings.header(@settings)
 
       {
-        wsdl: wdsl,
+        wsdl: wsdl,
         log_level: :info,
         namespaces: { 'xmlns:arr' => 'http://schemas.microsoft.com/2003/10/Serialization/Arrays',
                       'xmlns:i' => 'http://www.w3.org/2001/XMLSchema-instance' },
