@@ -22,7 +22,7 @@ module BingAdsReporting
     end
 
     #
-    # Gets the identifiers, names, and numbers of accounts that are accessible from the specified customer.
+    # Gets the identifiers, names, and numbers of accounts that are accessible by the currently authenticated user.
     # Docs: https://docs.microsoft.com/en-us/advertising/customer-management-service/getaccountsinfo?view=bingads-13
     #
     # @return [Array<Hash>] An array of information about advertiser accounts
